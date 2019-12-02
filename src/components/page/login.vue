@@ -1,7 +1,7 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">书斋在线书店后台管理系统</div>
+            <div class="ms-title">启明星后台管理系统</div>
             <div class="ms-remind">{{msg}}</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
                 <el-form-item prop="username">
@@ -48,7 +48,9 @@
                         const params = new URLSearchParams()
                         params.append('username', this.ruleForm.username)
                         params.append('password', this.ruleForm.password)
-                        this.$axios.post('/user-server/user/admin',params).then((res) => {
+                        this.$axios.post('/venus-admin-server/user/login',params).then((res) => {
+                            console.log(res.data)
+                            console.log(res.data.code)
                             if(res.data.status == 1){
                                 localStorage.setItem('ms_username',this.ruleForm.username);
                                 this.$router.push('/index')
