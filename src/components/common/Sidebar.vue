@@ -87,6 +87,17 @@
                                 title: '订单列表',
                             }
                         ]
+                    },
+                    {
+                        icon: 'iconfont icon-wen-lihuoshangjia',
+                        index: 'chat',
+                        title: '聊天室',
+                        subs: [
+                            {
+                                index: 'weChat',
+                                title: '在线聊天',
+                            }
+                        ]
                     }
                 ]
             }

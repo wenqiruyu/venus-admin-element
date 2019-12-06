@@ -122,6 +122,11 @@ export default new Router({
                     meta: { title: '店长推荐' }
                 },
                 {
+                    path: '/weChat',
+                    component: resolve => require(['../components/page/weChat.vue'], resolve),
+                    meta: { title: '在线聊天' }
+                },
+                {
                     path: '/404',
                     component: resolve => require(['../components/page/404.vue'], resolve),
                     meta: { title: '404' }

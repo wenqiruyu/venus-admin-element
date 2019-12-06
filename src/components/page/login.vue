@@ -49,10 +49,9 @@
                         params.append('username', this.ruleForm.username)
                         params.append('password', this.ruleForm.password)
                         this.$axios.post('/venus-admin-server/user/login',params).then((res) => {
-                            console.log(res.data)
-                            console.log(res.data.code)
-                            if(res.data.status == 1){
-                                localStorage.setItem('ms_username',this.ruleForm.username);
+                            if(res.data.code == 200){
+                                localStorage.setItem('ms_username',this.ruleForm.username)
+                                localStorage.setItem('token',res.data.data)
                                 this.$router.push('/index')
                             }else{
                                 this.msg = res.data.msg
