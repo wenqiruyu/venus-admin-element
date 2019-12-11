@@ -27,14 +27,22 @@
                     <!-- 聊天信息展示位置 -->
                     <div class="chat-content-show">
                         <el-card class="chat-content-show-card">
-                            <!-- <div>
-                                <span>{{chatAllMessage}}</span>
-                            </div> -->
                             <div v-for="(value,key,index) in chatAllMessage" :key="index">
-                                <el-tag v-if="value.name==name" type="success" style="float:right">我：{{value.msg}}</el-tag>
-                                <br />
-                                <el-tag v-if="value.name!=name" style="float:left">{{value.name}}：{{value.msg}}</el-tag>
-                                <br />
+                                <div v-if="value.username == 'venus'" class="chat-content-show-card-tips">
+                                    <span>{{value.chatMessage}}</span>
+                                </div>
+                                <div v-if="value.username == username" class="chat-content-show-card-msg">
+                                    <el-tag type="success" style="float:right">
+                                        {{value.username}}：{{value.chatMessage}}
+                                    </el-tag>
+                                    <br/>
+                                </div>
+                                <div v-if="value.username != username && value.username != 'venus'" class="chat-content-show-card-msg">
+                                    <el-tag style="float:left">
+                                        {{value.username}}：{{value.chatMessage}}
+                                    </el-tag>
+                                    <br/>
+                                </div>
                             </div>
                         </el-card>
                     </div>
@@ -46,7 +54,7 @@
                                 size="medium" rows="4">
                                 </el-input>
                             </div>
-                            <div class="chat-content-input-bottom">
+                            <div class="chat-content-input-button">
                                 <el-button type="text" class="button" @click="sendMessage">发送</el-button>
                             </div>
                         </el-card>
@@ -69,7 +77,7 @@
         name: 'WeChat',
         data(){
             return {
-                username: '梅子酒',
+                username: '',
                 chatMessage: '',
                 webSocket: null,
                 chatAllMessage: [],
@@ -81,14 +89,17 @@
         methods: {
             initWebSocket(){
                 const $vm = this;
-                const username = '梅子酒'
-                this.webSocket = new WebSocket('ws://localhost:10001/venus-admin-server/chat/' + username)
+                this.username = localStorage.getItem("venus_username")
+                this.webSocket = new WebSocket('ws://localhost:10001/venus-admin-server/chat/' + this.username)
                 this.webSocket.onopen = function() {
                     console.log('WebSocket已连接')
                 }
 
                 this.webSocket.onmessage = evt => {
-                    this.chatAllMessage.push("梅子酒", evt.data)
+                    var result = JSON.parse(evt.data)
+                    if(result.code == 200){
+                        this.chatAllMessage.push(result.data)
+                    }
                     console.log(evt.data)                    
                     console.log('数据已接收...')
                 }
@@ -96,11 +107,7 @@
                 this.webSocket.onclose = function () {
                     console.log('WebSocket连接已关闭...')
                 }
-
-                this.webSocket.onclose = function () {
-                    console.log('连接已关闭...')
-                }
-
+                
                 window.onbeforeunload = function() {
                     this.websocket.close();
                 }
@@ -163,6 +170,17 @@
     .chat-content-show-card{
         height: 450px;
     }
+    /*聊天室用户加入和退出tips提示*/
+    .chat-content-show-card-tips{
+        text-align: center;
+        width: 100%;
+        font-size: 13px;
+        color: #ff0000;
+    }
+    .chat-content-show-card-msg{
+        border:3px solid #000;
+        width: 100%;
+    }
     /*聊天信息输入位置*/
     .chat-content-input{
         width: 100%;
@@ -176,9 +194,9 @@
     .chat-content-input-message{
         height: 100px;
     }
-    .chat-content-input-bottom{
+    .chat-content-input-button{
         float: left;
-        margin-left: 700px;
+        margin-left: 500px;
     }
     /*用户好友列表*/
     .chat-user-list{
