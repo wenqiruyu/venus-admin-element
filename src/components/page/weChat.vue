@@ -117,6 +117,18 @@
                     this.webSocket.send(this.chatMessage)
                     this.chatMessage = ''
                 }
+            },
+            /** 查找用户的好友列表 */
+            userFriend(){
+                this.$axios.post('/venus-admin-server/user/login',params).then((res) => {
+                if(res.data.code == 200){
+                    localStorage.setItem('venus_username',this.ruleForm.username)
+                    localStorage.setItem('venus_token',res.data.data)
+                    this.$router.push('/index')
+                    }else{
+                        this.msg = res.data.msg
+                    }
+                })
             }
         }
     }
@@ -172,13 +184,15 @@
     }
     /*聊天室用户加入和退出tips提示*/
     .chat-content-show-card-tips{
+        border:3px solid #000;
+        margin-top: -10px;
         text-align: center;
         width: 100%;
         font-size: 13px;
         color: #ff0000;
+        float: left;
     }
     .chat-content-show-card-msg{
-        border:3px solid #000;
         width: 100%;
     }
     /*聊天信息输入位置*/
