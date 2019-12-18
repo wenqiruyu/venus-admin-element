@@ -56,6 +56,8 @@
                             }else{
                                 this.msg = res.data.msg
                             }
+                        }).catch(function (error) {
+                            console.log(error)
                         })
                     } else {
                         console.log('error submit!!');

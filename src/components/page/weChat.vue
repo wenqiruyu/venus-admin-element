@@ -90,7 +90,7 @@
             initWebSocket(){
                 const $vm = this;
                 this.username = localStorage.getItem("venus_username")
-                this.webSocket = new WebSocket('ws://localhost:10001/venus-admin-server/chat/' + this.username)
+                this.webSocket = new WebSocket('ws://122.51.166.19:10001/venus-admin-server/chat/' + this.username)
                 this.webSocket.onopen = function() {
                     console.log('WebSocket已连接')
                 }
