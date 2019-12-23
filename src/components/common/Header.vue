@@ -1,46 +1,50 @@
 <template>
     <div class="header">
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i class="el-icon-menu"></i>
+        <div>
+            <div class="logo">
+                企业员工信息管理系统
+            </div>
+            <!-- 折叠按钮 -->
+            <div class="collapse-btn" @click="collapseChage">
+                <i class="el-icon-menu"></i>
+            </div>
+            <div class="textMarquee">
+                <marquee>通知：今天，明天，后天，开始大幅降温了，请不要傻不愣登的，只要风度不要温度，再把自己弄感冒喽！</marquee>
+            </div>
         </div>
-        <div class="logo">书斋在线书店后台管理系统</div>
         <div class="header-right">
             <div class="header-user-con">
-                <!-- 全屏显示 -->
-                <div class="btn-fullscreen" @click="handleFullScreen">
-                    <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
-                        <i class="el-icon-rank"></i>
-                    </el-tooltip>
-                </div>
                 <!-- 消息中心 -->
-                <!-- <div class="btn-bell">
+                <div class="btn-bell">
                     <el-tooltip effect="dark" :content="message?`有${message}条未读消息`:`消息中心`" placement="bottom">
                         <router-link to="/tabs">
                             <i class="el-icon-bell"></i>
                         </router-link>
                     </el-tooltip>
                     <span class="btn-bell-badge" v-if="message"></span>
-                </div> -->
+                </div>
                 <!-- 用户头像 -->
                 <div class="user-avator"><img src="../../assets/img/img.jpg"></div>
-                <!-- <div>
-                    <span class="el-dropdown-link">
-                        {{username}}
-                    </span>
-                    <el-dropdown-item divided  command="loginout">退出登录</el-dropdown-item>
-                </div> -->
                 <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
-                        {{username}} <i class="el-icon-caret-bottom"></i>
+                       个人中心 <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <a href="http://blog.gdfengshuo.com/about/" target="_blank">
-                            <el-dropdown-item>关于作者</el-dropdown-item>
+                            <el-dropdown-item>基本资料</el-dropdown-item>
                         </a>
                         <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                            <el-dropdown-item>项目仓库</el-dropdown-item>
+                            <el-dropdown-item>消息中心</el-dropdown-item>
+                        </a>
+                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+                            <el-dropdown-item>修改密码</el-dropdown-item>
+                        </a>
+                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+                            <el-dropdown-item>皮肤动画</el-dropdown-item>
+                        </a>
+                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+                            <el-dropdown-item>锁定账号</el-dropdown-item>
                         </a>
                         <el-dropdown-item divided  command="loginout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
@@ -78,33 +82,6 @@
             collapseChage(){
                 this.collapse = !this.collapse;
                 bus.$emit('collapse', this.collapse);
-            },
-            // 全屏事件
-            handleFullScreen(){
-                let element = document.documentElement;
-                if (this.fullscreen) {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.webkitCancelFullScreen) {
-                        document.webkitCancelFullScreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                } else {
-                    if (element.requestFullscreen) {
-                        element.requestFullscreen();
-                    } else if (element.webkitRequestFullScreen) {
-                        element.webkitRequestFullScreen();
-                    } else if (element.mozRequestFullScreen) {
-                        element.mozRequestFullScreen();
-                    } else if (element.msRequestFullscreen) {
-                        // IE11
-                        element.msRequestFullscreen();
-                    }
-                }
-                this.fullscreen = !this.fullscreen;
             }
         },
         mounted(){
@@ -119,21 +96,36 @@
         position: relative;
         box-sizing: border-box;
         width: 100%;
-        height: 70px;
+        height: 100px;
         font-size: 22px;
         color: #fff;
     }
     .collapse-btn{
         float: left;
-        padding: 0 21px;
-        cursor: pointer;
-        line-height: 70px;
+        width:30px;
+        height:30px;
+        position:relative;
+        left:200px;
+        top:16px;
+        color:#fff;
+        background-color:#1AA094;
+        text-align:center;
+        line-height:30px;
+        cursor:pointer
     }
     .header .logo{
         float: left;
-        width:250px;
-        line-height: 70px;
+        margin-top: 10px;
+        color:#fff;
+        font-size:20px
     }
+    /*文字跑马灯*/
+    .textMarquee{
+        float:left;
+        width:450px;
+        /*margin-top: 20px;*/
+    }
+
     .header-right{
         float: right;
         padding-right: 50px;

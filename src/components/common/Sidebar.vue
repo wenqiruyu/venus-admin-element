@@ -5,9 +5,10 @@
             <template v-for="item in items">
                 <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
-                        <template slot="title">
+                        <!-- <template slot="title">
                             <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
-                        </template>
+                        </template> -->
+                        <span slot="title">{{ item.title }}</span>
                         <template v-for="subItem in item.subs">
                             <el-submenu v-if="subItem.subs" :index="subItem.index" :key="subItem.index">
                                 <template slot="title">{{ subItem.title }}</template>
@@ -23,7 +24,7 @@
                 </template>
                 <template v-else>
                     <el-menu-item :index="item.index" :key="item.index">
-                        <i :class="item.icon"></i><span slot="title">{{ item.title }}</span>
+                        <span slot="title">{{ item.title }}</span>
                     </el-menu-item>
                 </template>
             </template>
