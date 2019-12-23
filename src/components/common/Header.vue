@@ -1,9 +1,6 @@
 <template>
     <div class="header">
         <div>
-            <div class="logo">
-                企业员工信息管理系统
-            </div>
             <!-- 折叠按钮 -->
             <div class="collapse-btn" @click="collapseChage">
                 <i class="el-icon-menu"></i>
@@ -96,9 +93,11 @@
         position: relative;
         box-sizing: border-box;
         width: 100%;
-        height: 100px;
+        float: left;
+        margin-left: 195px;
+        height: 50px;
         font-size: 22px;
-        color: #fff;
+        color: #1AA094;
     }
     .collapse-btn{
         float: left;
@@ -112,12 +111,6 @@
         text-align:center;
         line-height:30px;
         cursor:pointer
-    }
-    .header .logo{
-        float: left;
-        margin-top: 10px;
-        color:#fff;
-        font-size:20px
     }
     /*文字跑马灯*/
     .textMarquee{
