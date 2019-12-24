@@ -1,6 +1,10 @@
 <template>
     <div class="sidebar" v-show="collapse">
-        <div class="logo">企业员工信息管理系统</div>
+        <div class="logo"  style="background-color: #232329">
+            <span>
+                企业员工信息管理系统
+            </span>   
+        </div>
         <div class="sidebar-menu">
             <el-menu
                 class="sidebar-el-menu"
